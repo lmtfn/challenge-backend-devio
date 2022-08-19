@@ -1,6 +1,6 @@
 import { QueryInterface } from 'sequelize';
 // eslint-disable-next-line import/extensions
-import ClientsModel from '../../../domain/clients/clients.model';
+import ClientsModel from '../../../domain/clients/clientsModel';
 
 export default {
   up: (queryInterface: QueryInterface): Promise<void> =>
