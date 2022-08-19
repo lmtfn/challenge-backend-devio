@@ -1,31 +1,35 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
-import sequelize from "../../infrastructure/database";
-import { Client } from "./client.entity";
+import sequelize from '../../infrastructure/database';
+// eslint-disable-next-line import/extensions
+import { Client } from './client.entity';
 
 class ClientsModel extends Model<Client> {}
 
-ClientsModel.init({
+ClientsModel.init(
+  {
     id: {
-        type: DataTypes.STRING(36),
-        primaryKey: true,
-        allowNull: false,
-        defaultValue: uuidv4()
+      type: DataTypes.STRING(36),
+      primaryKey: true,
+      allowNull: false,
+      defaultValue: uuidv4(),
     },
     name: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     cpf: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique:true
-    }
-}, {
-    tableName: "clients",
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+  },
+  {
+    tableName: 'clients',
     timestamps: true,
     underscored: true,
-    sequelize: sequelize
-})
+    sequelize,
+  },
+);
 
 export default ClientsModel;
