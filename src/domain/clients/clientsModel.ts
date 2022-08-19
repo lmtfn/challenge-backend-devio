@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
-// eslint-disable-next-line import/extensions
 import { Client } from './clientEntity';
 
 class ClientsModel extends Model<Client> {}
