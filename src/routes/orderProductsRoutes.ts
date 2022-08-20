@@ -3,9 +3,21 @@ import OrderProductsController from '../domain/orderProducts/orderProductsContro
 
 const orderProductsRouter = express.Router();
 
+orderProductsRouter.post(
+  '/order-items',
+  OrderProductsController.createItemInOrderId,
+);
 orderProductsRouter.get(
-  '/order-products/:orderId',
-  OrderProductsController.getProductsByOrderId,
+  '/order-items/:orderId',
+  OrderProductsController.getItemsInOrderId,
+);
+orderProductsRouter.patch(
+  '/order-items/:orderId',
+  OrderProductsController.updateItemInOrderId,
+);
+orderProductsRouter.delete(
+  '/order-items/:orderId',
+  OrderProductsController.deleteItemInOrderId,
 );
 
 export default orderProductsRouter;
