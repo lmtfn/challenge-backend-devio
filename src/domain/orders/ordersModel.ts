@@ -17,7 +17,7 @@ OrdersModel.init(
     },
     clientsName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     totalPrice: {
       type: DataTypes.DECIMAL,

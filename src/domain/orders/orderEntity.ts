@@ -6,7 +6,7 @@ export enum enumOrderStatus {
 
 export interface Order {
   id: string;
-  clientsName: string;
+  clientsName?: string;
   totalPrice: number;
   status: enumOrderStatus;
   createdAt?: string;
