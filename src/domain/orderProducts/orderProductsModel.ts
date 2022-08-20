@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
 import { OrderProduct } from './orderProductEntity';
 import ProductsModel from '../products/productsModel';
-import OrdersModel from '../orders/ordersModel';
 
 class OrdersProductsModel extends Model<OrderProduct> {}
 

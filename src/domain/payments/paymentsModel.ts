@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
-import OrdersModel from '../orders/ordersModel';
 import { Payment } from './paymentEntity';
 
 class PaymentsModel extends Model<Payment> {}
