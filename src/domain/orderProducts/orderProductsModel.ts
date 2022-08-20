@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
 import { OrderProduct } from './orderProductEntity';
 import ProductsModel from '../products/productsModel';
-import OrdersModel from '../orders/ordersModel';
 
 class OrdersProductsModel extends Model<OrderProduct> {}
 
@@ -26,10 +25,6 @@ OrdersProductsModel.init(
     orderId: {
       type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: OrdersModel,
-        key: 'id',
-      },
     },
     amount: {
       type: DataTypes.INTEGER,
@@ -51,12 +46,6 @@ OrdersProductsModel.init(
     sequelize,
   },
 );
-
-OrdersProductsModel.hasOne(OrdersModel, {
-  foreignKey: 'id',
-  sourceKey: 'orderId',
-  as: 'order',
-});
 
 OrdersProductsModel.hasOne(ProductsModel, {
   foreignKey: 'id',
