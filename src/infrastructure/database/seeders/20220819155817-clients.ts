@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions
 import ClientsModel from '../../../domain/clients/clientsModel';
 
 export default {
