@@ -1,14 +1,14 @@
 import { QueryInterface } from 'sequelize';
-import ClientsModel from '../../../domain/clients/clientsModel';
+import OrdersModel from '../../../domain/orders/ordersModel';
 
 export default {
   up: (queryInterface: QueryInterface): Promise<void> =>
     queryInterface.sequelize.transaction(async () => {
-      await ClientsModel.sync({ force: true });
+      await OrdersModel.sync({ force: true });
     }),
 
   down: (queryInterface: QueryInterface): Promise<void> =>
     queryInterface.sequelize.transaction(async () => {
-      await ClientsModel.drop();
+      await OrdersModel.drop();
     }),
 };
