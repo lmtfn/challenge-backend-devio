@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
-import ClientsModel from '../clients/clientsModel';
 import PaymentsModel from '../payments/paymentsModel';
 import OrderProductsModel from '../orderProducts/orderProductsModel';
 import { Order } from './orderEntity';
@@ -16,16 +15,16 @@ OrdersModel.init(
       allowNull: false,
       defaultValue: uuidv4(),
     },
-    clientId: {
+    clientsName: {
       type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: ClientsModel,
-        key: 'id',
-      },
     },
     totalPrice: {
       type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM('initiated', 'sentToProduction', 'concluded'),
       allowNull: false,
     },
   },
@@ -36,12 +35,6 @@ OrdersModel.init(
     sequelize,
   },
 );
-
-OrdersModel.hasOne(ClientsModel, {
-  foreignKey: 'id',
-  sourceKey: 'clientId',
-  as: 'client',
-});
 
 OrdersModel.hasMany(PaymentsModel, {
   foreignKey: 'orderId',

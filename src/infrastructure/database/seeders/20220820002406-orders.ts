@@ -1,3 +1,4 @@
+import { enumOrderStatus } from '../../../domain/orders/orderEntity';
 import OrdersModel from '../../../domain/orders/ordersModel';
 
 export default {
@@ -6,13 +7,21 @@ export default {
       [
         {
           id: '8fea0c95-e661-4315-8164-1d740d1a8e38',
-          clientId: 'ffec8efd-6dde-41f3-8475-c571caa048ba',
+          clientsName: 'Laura Neves',
           totalPrice: 48.1,
+          status: enumOrderStatus.initiated,
         },
         {
           id: '27bdb86a-5ee1-4ed9-86a7-227bebeb54ee',
-          clientId: '8e423547-175f-4b89-b4d6-df971f1181b2',
+          clientsName: 'João',
           totalPrice: 25.8,
+          status: enumOrderStatus.concluded,
+        },
+        {
+          id: 'f2f32fc5-0f77-45c0-93f0-5b2ec834bb27',
+          clientsName: 'Olivia Magalhães',
+          totalPrice: 24.1,
+          status: enumOrderStatus.sentToProduction,
         },
       ],
       {},
