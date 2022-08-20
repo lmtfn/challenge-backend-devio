@@ -36,6 +36,14 @@ export default {
           parcialPrice: 25.8,
           observation: 'No peanut, please!',
         },
+        {
+          id: 'a1fe6bcb-978e-4d7e-a9d7-a064db201898',
+          productId: '62e60c1b-2b27-4e02-9478-5194419ae5e9',
+          orderId: 'f2f32fc5-0f77-45c0-93f0-5b2ec834bb27',
+          amount: 1,
+          parcialPrice: 24.1,
+          observation: '',
+        },
       ],
       {},
     );
