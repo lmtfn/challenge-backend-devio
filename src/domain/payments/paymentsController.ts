@@ -6,7 +6,7 @@ const PaymentsController = {
     try {
       const { type, orderId } = req.body;
       const data = await PaymentsService.insertPaymentMethod(type, orderId);
-      res.status(200);
+      res.status(201);
       res.json(data);
     } catch (err: any) {
       res.status(400);
