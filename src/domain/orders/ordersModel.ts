@@ -2,6 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
 import ClientsModel from '../clients/clientsModel';
+import PaymentsModel from '../payments/paymentsModel';
 import OrderProductsModel from '../orderProducts/orderProductsModel';
 import { Order } from './orderEntity';
 
@@ -40,6 +41,18 @@ OrdersModel.hasOne(ClientsModel, {
   foreignKey: 'id',
   sourceKey: 'clientId',
   as: 'client',
+});
+
+OrdersModel.hasMany(PaymentsModel, {
+  foreignKey: 'orderId',
+  sourceKey: 'id',
+  as: 'payments',
+});
+
+OrdersModel.hasMany(OrderProductsModel, {
+  foreignKey: 'orderId',
+  sourceKey: 'id',
+  as: 'orderproducts',
 });
 
 export default OrdersModel;

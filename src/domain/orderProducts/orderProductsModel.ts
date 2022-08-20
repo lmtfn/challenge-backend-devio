@@ -26,10 +26,6 @@ OrdersProductsModel.init(
     orderId: {
       type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: OrdersModel,
-        key: 'id',
-      },
     },
     amount: {
       type: DataTypes.INTEGER,
@@ -51,12 +47,6 @@ OrdersProductsModel.init(
     sequelize,
   },
 );
-
-OrdersProductsModel.hasOne(OrdersModel, {
-  foreignKey: 'id',
-  sourceKey: 'orderId',
-  as: 'order',
-});
 
 OrdersProductsModel.hasOne(ProductsModel, {
   foreignKey: 'id',

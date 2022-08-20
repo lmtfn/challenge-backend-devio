@@ -17,10 +17,6 @@ PaymentsModel.init(
     orderId: {
       type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: OrdersModel,
-        key: 'id',
-      },
     },
     type: {
       type: DataTypes.ENUM('pix', 'cash', 'creditCard', 'debitCard'),
@@ -39,11 +35,5 @@ PaymentsModel.init(
     sequelize,
   },
 );
-
-PaymentsModel.hasOne(OrdersModel, {
-  foreignKey: 'id',
-  sourceKey: 'orderId',
-  as: 'order',
-});
 
 export default PaymentsModel;
