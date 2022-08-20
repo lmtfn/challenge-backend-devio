@@ -1,20 +1,18 @@
-// import ProductsModel from '../products/productsModel';
+import sequelize from 'sequelize';
+import OrderProductsModel from '../orderProducts/orderProductsModel';
 
 const ProductsService = {
   async getProductsList() {
-    // const orderExists = await OrdersModel.count({
-    //   where: {
-    //     id: orderId,
-    //   },
-    // });
-    // if (!orderExists) throw new Error('Order not found');
-    // const orderDetails = await OrdersModel.findAll({
-    //   where: {
-    //     id: orderId,
-    //   },
-    //   include: ['order_products', 'products'],
-    // });
-    // return orderDetails;
+    const productsList = await OrderProductsModel.findAll({
+      attributes: [
+        'productId',
+        [sequelize.fn('sum', sequelize.col('amount')), 'total_amount'],
+      ],
+      group: ['productId'],
+      order: [['total_amount', 'DESC']],
+      include: 'product',
+    });
+    return productsList;
   },
 };
 
