@@ -12,7 +12,7 @@ export interface Payment {
   orderId: string;
   order?: Order;
   type: enumPaymentType;
-  receipt?: string;
+  receiptNumber?: string;
   createdAt?: string;
   updatedAt?: string;
 }
