@@ -2,7 +2,6 @@ import { DataTypes, Model } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
 import PaymentsModel from '../payments/paymentsModel';
-import OrderProductsModel from '../orderProducts/orderProductsModel';
 import { Order } from './orderEntity';
 
 class OrdersModel extends Model<Order> {}
@@ -24,7 +23,12 @@ OrdersModel.init(
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM('initiated', 'sentToProduction', 'concluded'),
+      type: DataTypes.ENUM(
+        'initiated',
+        'sentToProduction',
+        'concluded',
+        'cancelled',
+      ),
       allowNull: false,
     },
   },
@@ -40,12 +44,6 @@ OrdersModel.hasMany(PaymentsModel, {
   foreignKey: 'orderId',
   sourceKey: 'id',
   as: 'payments',
-});
-
-OrdersModel.hasMany(OrderProductsModel, {
-  foreignKey: 'orderId',
-  sourceKey: 'id',
-  as: 'orderproducts',
 });
 
 export default OrdersModel;
