@@ -23,6 +23,7 @@ const OrdersService = {
       where: {
         id: orderId,
       },
+      include: 'payments',
     });
     return orderDetails;
   },
