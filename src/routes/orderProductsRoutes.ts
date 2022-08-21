@@ -4,7 +4,7 @@ import OrderProductsController from '../domain/orderProducts/orderProductsContro
 const orderProductsRouter = express.Router();
 
 orderProductsRouter.post(
-  '/order-items',
+  '/order-items/:orderId',
   OrderProductsController.createItemInOrderId,
 );
 orderProductsRouter.get(
@@ -12,12 +12,12 @@ orderProductsRouter.get(
   OrderProductsController.getItemsInOrderId,
 );
 orderProductsRouter.patch(
-  '/order-items/:orderId',
-  OrderProductsController.updateItemInOrderId,
+  '/order-items/:orderProductId',
+  OrderProductsController.updateItemInOrder,
 );
 orderProductsRouter.delete(
-  '/order-items/:orderId',
-  OrderProductsController.deleteItemInOrderId,
+  '/order-items/:orderProductId',
+  OrderProductsController.deleteItemInOrder,
 );
 
 export default orderProductsRouter;

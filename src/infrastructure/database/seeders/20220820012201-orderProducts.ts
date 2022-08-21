@@ -9,7 +9,7 @@ export default {
           productId: '83db0996-df3a-40ad-82d3-9c1f0afb5573',
           orderId: '8fea0c95-e661-4315-8164-1d740d1a8e38',
           amount: 1,
-          parcialPrice: 12.9,
+          partialPrice: 12.9,
           observation: '',
         },
         {
@@ -17,7 +17,7 @@ export default {
           productId: 'eac110e5-c786-47bb-a5a4-212db4c778bc',
           orderId: '8fea0c95-e661-4315-8164-1d740d1a8e38',
           amount: 1,
-          parcialPrice: 10.1,
+          partialPrice: 10.1,
           observation: '',
         },
         {
@@ -25,7 +25,7 @@ export default {
           productId: 'e8e56817-6cc8-4eb3-bb91-0cd34e86fbed',
           orderId: '8fea0c95-e661-4315-8164-1d740d1a8e38',
           amount: 1,
-          parcialPrice: 25.1,
+          partialPrice: 25.1,
           observation: 'No onions',
         },
         {
@@ -33,7 +33,7 @@ export default {
           productId: '83db0996-df3a-40ad-82d3-9c1f0afb5573',
           orderId: '27bdb86a-5ee1-4ed9-86a7-227bebeb54ee',
           amount: 2,
-          parcialPrice: 25.8,
+          partialPrice: 25.8,
           observation: 'No peanut, please!',
         },
         {
@@ -41,7 +41,7 @@ export default {
           productId: '62e60c1b-2b27-4e02-9478-5194419ae5e9',
           orderId: 'f2f32fc5-0f77-45c0-93f0-5b2ec834bb27',
           amount: 1,
-          parcialPrice: 24.1,
+          partialPrice: 24.1,
           observation: '',
         },
       ],

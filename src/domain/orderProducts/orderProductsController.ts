@@ -4,14 +4,23 @@ import OrderProductsService from './orderProductsService';
 const OrderProductsController = {
   async createItemInOrderId(req: Request, res: Response) {
     try {
-      const data = await OrderProductsService.createItemInOrderId();
-      res.status(200);
+      const { orderId } = req.params;
+      const { productId, amount, partialPrice, observation } = req.body;
+      const data = await OrderProductsService.createItemInOrderId(
+        orderId,
+        productId,
+        amount,
+        partialPrice,
+        observation,
+      );
+      res.status(201);
       res.json(data);
     } catch (err: any) {
       res.status(400);
       res.json({ message: err.message });
     }
   },
+
   async getItemsInOrderId(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
@@ -23,10 +32,17 @@ const OrderProductsController = {
       res.json({ message: err.message });
     }
   },
-  async updateItemInOrderId(req: Request, res: Response) {
+
+  async updateItemInOrder(req: Request, res: Response) {
     try {
-      const { orderId } = req.params;
-      const data = await OrderProductsService.updateItemInOrderId(orderId);
+      const { orderProductId } = req.params;
+      const { amount, partialPrice, observation } = req.body;
+      const data = await OrderProductsService.updateItemInOrder(
+        orderProductId,
+        amount,
+        partialPrice,
+        observation,
+      );
       res.status(200);
       res.json(data);
     } catch (err: any) {
@@ -34,12 +50,13 @@ const OrderProductsController = {
       res.json({ message: err.message });
     }
   },
-  async deleteItemInOrderId(req: Request, res: Response) {
+
+  async deleteItemInOrder(req: Request, res: Response) {
     try {
-      const { orderId } = req.params;
-      const data = await OrderProductsService.deleteItemInOrderId(orderId);
-      res.status(200);
-      res.json(data);
+      const { orderProductId } = req.params;
+      await OrderProductsService.deleteItemInOrder(orderProductId);
+      res.json('Item deleted');
+      res.status(204);
     } catch (err: any) {
       res.status(400);
       res.json({ message: err.message });

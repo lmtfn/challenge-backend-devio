@@ -8,8 +8,8 @@ export interface OrderProduct {
   orderId: string;
   order?: Order;
   amount: number;
-  parcialPrice: number;
-  observation: string;
+  partialPrice: number;
+  observation?: string;
   createdAt?: string;
   updatedAt?: string;
 }
