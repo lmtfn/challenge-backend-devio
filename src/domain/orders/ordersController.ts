@@ -5,17 +5,17 @@ const OrdersController = {
   async createNewOrder(req: Request, res: Response) {
     try {
       const data = await OrdersService.createNewOrder();
-      res.status(200);
+      res.status(201);
       res.json(data);
     } catch (err: any) {
       res.status(400);
       res.json({ message: err.message });
     }
   },
-  async getOrderById(req: Request, res: Response) {
+  async getOrderSummary(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
-      const data = await OrdersService.getOrderById(orderId);
+      const data = await OrdersService.getOrderSummary(orderId);
       res.status(200);
       res.json(data);
     } catch (err: any) {
@@ -26,18 +26,13 @@ const OrdersController = {
   async updateOrderInfo(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
-      const data = await OrdersService.updateOrderInfo(orderId);
-      res.status(200);
-      res.json(data);
-    } catch (err: any) {
-      res.status(400);
-      res.json({ message: err.message });
-    }
-  },
-  async updateOrderStatus(req: Request, res: Response) {
-    try {
-      const { orderId } = req.params;
-      const data = await OrdersService.updateOrderStatus(orderId);
+      const { clientsName, totalPrice, status } = req.body;
+      const data = await OrdersService.updateOrderInfo(
+        orderId,
+        clientsName,
+        totalPrice,
+        status,
+      );
       res.status(200);
       res.json(data);
     } catch (err: any) {

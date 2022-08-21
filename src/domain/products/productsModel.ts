@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../../infrastructure/database';
+import OrderProductsModel from '../orderProducts/orderProductsModel';
 import { Product } from './productEntity';
 
 class ProductsModel extends Model<Product> {}

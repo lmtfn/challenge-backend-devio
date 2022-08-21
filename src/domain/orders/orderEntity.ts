@@ -2,6 +2,7 @@ export enum enumOrderStatus {
   initiated = 'initiated',
   sentToProduction = 'sentToProduction',
   concluded = 'concluded',
+  cancelled = 'cancelled',
 }
 
 export interface Order {
