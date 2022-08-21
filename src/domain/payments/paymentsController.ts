@@ -4,8 +4,13 @@ import PaymentsService from './paymentsService';
 const PaymentsController = {
   async insertPaymentMethod(req: Request, res: Response) {
     try {
-      const { type, orderId } = req.body;
-      const data = await PaymentsService.insertPaymentMethod(type, orderId);
+      const { type, value, orderId, receiptNumber } = req.body;
+      const data = await PaymentsService.insertPaymentMethod(
+        type,
+        value,
+        orderId,
+        receiptNumber,
+      );
       res.status(201);
       res.json(data);
     } catch (err: any) {

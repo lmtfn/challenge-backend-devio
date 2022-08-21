@@ -4,7 +4,12 @@ import PaymentsModel from '../payments/paymentsModel';
 import { enumPaymentType } from './paymentEntity';
 
 const PaymentsService = {
-  async insertPaymentMethod(type: enumPaymentType, orderId: string) {
+  async insertPaymentMethod(
+    type: enumPaymentType,
+    value: number,
+    orderId: string,
+    receiptNumber: string,
+  ) {
     const orderExists = await OrdersModel.count({
       where: {
         id: orderId,
@@ -15,6 +20,8 @@ const PaymentsService = {
       id: uuidv4(),
       orderId,
       type,
+      value,
+      receiptNumber,
     });
     return newPayment;
   },

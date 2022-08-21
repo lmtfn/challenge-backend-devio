@@ -21,6 +21,10 @@ PaymentsModel.init(
       type: DataTypes.ENUM('pix', 'cash', 'creditCard', 'debitCard'),
       allowNull: false,
     },
+    value: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
     receiptNumber: {
       type: DataTypes.STRING,
       allowNull: false,
