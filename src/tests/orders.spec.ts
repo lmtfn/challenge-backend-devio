@@ -5,12 +5,10 @@ import { enumOrderStatus } from '../domain/orders/orderEntity';
 
 describe('No controller de Orders, ao executar a função', () => {
   describe('createNewOrder,', () => {
-    const totalPrice = 10.1;
     const status = enumOrderStatus.initiated;
 
     test('em caso de sucesso, deve retornar 201', async () => {
       const response = await supertest(app).post('/order').send({
-        totalPrice,
         status,
       });
 
@@ -19,7 +17,6 @@ describe('No controller de Orders, ao executar a função', () => {
 
     test('em caso de sucesso, deve retornar objeto com tipos corretos', async () => {
       const response = await supertest(app).post('/order').send({
-        totalPrice,
         status,
       });
 

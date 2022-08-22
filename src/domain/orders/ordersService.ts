@@ -1,8 +1,19 @@
 import { v4 as uuidv4 } from 'uuid';
 import OrdersModel from '../orders/ordersModel';
+import PaymentsModel from '../payments/paymentsModel';
 import { enumOrderStatus } from './orderEntity';
 
 const OrdersService = {
+  async orderExists(orderId: string) {
+    const orderExists = await OrdersModel.count({
+      where: {
+        id: orderId,
+      },
+    });
+
+    return orderExists;
+  },
+
   async createNewOrder() {
     const newOrder = await OrdersModel.create({
       id: uuidv4(),
@@ -12,33 +23,36 @@ const OrdersService = {
     return newOrder;
   },
 
-  async getOrderSummary(orderId: string) {
-    const orderExists = await OrdersModel.count({
+  async getOrderInfo(orderId: string) {
+    const orderDetails = await OrdersModel.findOne({
       where: {
         id: orderId,
       },
-    });
-    if (!orderExists) throw new Error('Order not found');
-    const orderDetails = await OrdersModel.findAll({
-      where: {
-        id: orderId,
-      },
-      include: 'payments',
     });
     return orderDetails;
   },
 
-  async updateOrderInfo(
-    orderId: string,
-    clientsName: string,
-    totalPrice: number,
-    status: enumOrderStatus,
-  ) {
-    const orderExists = await OrdersModel.count({
+  async getOrderInfoWithPayment(orderId: string) {
+    const orderExists = await this.orderExists(orderId);
+    if (!orderExists) throw new Error('Order not found');
+    const orderDetails = await OrdersModel.findAll({
+      attributes: ['id', 'clientsName', 'totalPrice', 'status'],
       where: {
         id: orderId,
       },
+      include: [
+        {
+          model: PaymentsModel,
+          as: 'payments',
+          attributes: ['id', 'type', 'value', 'receiptNumber'],
+        },
+      ],
     });
+    return orderDetails;
+  },
+
+  async updateOrderInfo({ orderId, clientsName, totalPrice, status }: any) {
+    const orderExists = await this.orderExists(orderId);
     if (!orderExists) throw new Error('Order not found');
     await OrdersModel.update(
       {
@@ -52,12 +66,7 @@ const OrdersService = {
         },
       },
     );
-    const updatedOrder = await OrdersModel.findOne({
-      where: {
-        id: orderId,
-      },
-    });
-    return updatedOrder;
+    return this.getOrderInfo(orderId);
   },
 };
 
