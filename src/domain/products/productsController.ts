@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import ProductsService from './productsService';
+import OrderProductsService from '../orderProducts/orderProductsService';
 
 const ProductsController = {
   async getProductsList(req: Request, res: Response) {
     try {
-      const data = await ProductsService.getProductsList();
+      const data = await OrderProductsService.getProductsRanking();
       res.status(200);
       res.json(data);
     } catch (err: any) {

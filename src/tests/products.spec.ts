@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import supertest from 'supertest';
 import app from '../config/server';
-import ProductsService from '../domain/products/productsService';
 
 describe('No controller de Products, ao executar a função', () => {
   describe('getProductsList,', () => {
@@ -10,13 +9,10 @@ describe('No controller de Products, ao executar a função', () => {
 
       expect(response.status).toBe(200);
     });
-  });
-});
 
-describe('No service de Products, a função', () => {
-  describe('getProductsList,', () => {
     test('deve retornar um objeto de objetos', async () => {
-      expect(typeof ProductsService.getProductsList()).toBe('object');
+      const response = await supertest(app).get('/products');
+      expect(typeof response).toBe('object');
     });
   });
 });
