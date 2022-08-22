@@ -12,10 +12,10 @@ const OrdersController = {
       res.json({ message: err.message });
     }
   },
-  async getOrderSummary(req: Request, res: Response) {
+  async getOrderInfoWithPayment(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
-      const data = await OrdersService.getOrderSummary(orderId);
+      const data = await OrdersService.getOrderInfoWithPayment(orderId);
       res.status(200);
       res.json(data);
     } catch (err: any) {
@@ -27,12 +27,12 @@ const OrdersController = {
     try {
       const { orderId } = req.params;
       const { clientsName, totalPrice, status } = req.body;
-      const data = await OrdersService.updateOrderInfo(
+      const data = await OrdersService.updateOrderInfo({
         orderId,
         clientsName,
         totalPrice,
         status,
-      );
+      });
       res.status(200);
       res.json(data);
     } catch (err: any) {
