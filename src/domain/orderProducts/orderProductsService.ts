@@ -1,5 +1,7 @@
+import sequelize from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import OrdersModel from '../orders/ordersModel';
+import ProductsModel from '../products/productsModel';
 import OrderProductsModel from './orderProductsModel';
 
 const OrderProductsService = {
@@ -25,6 +27,25 @@ const OrderProductsService = {
       observation,
     });
     return newOrderItems;
+  },
+
+  async getProductsRanking() {
+    const productsList = await OrderProductsModel.findAll({
+      attributes: [
+        'productId',
+        [sequelize.fn('sum', sequelize.col('amount')), 'total_amount'],
+      ],
+      group: ['productId'],
+      order: [['total_amount', 'DESC']],
+      include: [
+        {
+          model: ProductsModel,
+          as: 'product',
+          attributes: ['name', 'category', 'code', 'unitPrice'],
+        },
+      ],
+    });
+    return productsList;
   },
 
   async getItemsInOrderId(orderId: string) {
