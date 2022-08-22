@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "npm run setup && jest",
     "dev": "ts-node-dev src/index.ts",
     "db:reset": "npx sequelize db:migrate:undo:all --migrations-path dist/infrastructure/database/migrations",
     "setup": "npm run build && npm run db:reset &&  npx sequelize db:migrate --migrations-path dist/infrastructure/database/migrations && npx sequelize db:seed:all --seeders-path dist/infrastructure/database/seeders",
@@ -21,10 +21,12 @@
   },
   "homepage": "https://github.com/lmtfn/challenge-backend-devio#readme",
   "dependencies": {
+    "@faker-js/faker": "^7.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-validation": "^4.1.0",
+    "faker-js": "^1.0.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.4",
     "uuid": "^8.3.2"
