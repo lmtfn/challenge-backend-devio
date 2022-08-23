@@ -80,11 +80,18 @@ const OrderProductsService = {
 
     const itemInfo: any = await this.getOrderItem(orderProductId);
 
+    let newAmount;
+    if (!amount) {
+      newAmount = itemInfo.amount;
+    } else {
+      newAmount = amount;
+    }
+
     const unitPrice = await ProductsService.getUnitPrice(itemInfo.productId);
     await OrderProductsModel.update(
       {
-        amount,
-        partialPrice: parseFloat((unitPrice * amount).toFixed(2)),
+        amount: newAmount,
+        partialPrice: parseFloat((unitPrice * newAmount).toFixed(2)),
         observation,
       },
       {
