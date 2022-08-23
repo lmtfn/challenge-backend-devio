@@ -8,8 +8,6 @@ Este é um projeto de api para um restaurante de fast-food criar e administrar o
 
 Abaixo estão as instruções para rodar o projeto na sua máquina local, para fins de desenvolvimento e teste.
 
-Consulte **Implantação** para saber como implantar o projeto.
-
 ### 📋 Pré-requisitos
 
 É necessário o gerenciador de pacotes npm para seguir este passo a passo.
@@ -32,11 +30,11 @@ Para instalar o projeto na sua máquina, siga os passos abaixo:
    ```
 3. Crie uma cópia do arquivo .envExample na raiz do projeto, chame-a de .env e insira nela os dados do banco de dados que você quer utilizar: 
    ```js
-    DB_HOST = *nome do servidor (exemplo: localhost)*
-    DB_USER = *usuário*
-    DB_PASS = *senha*
-    DB_NAME = *nome da base de dados*
-    DB_PORT = *porta*
+    DB_HOST = Nome ou link do servidor (exemplo: localhost)
+    DB_USER = Usuário
+    DB_PASS = Senha
+    DB_NAME = Nome da base de dados
+    DB_PORT = Porta
    ```
 4. Com a conexão feita, crie a base de dados dentro do seu servidor:
     ```sh
@@ -60,7 +58,7 @@ Com o servidor rodando, acesse plataformas como Postman ou Insomnia para fazer t
 ## ⚙️ Executando os testes
 
 Foram feitos testes para cada endpoint do projeto. Eles podem ser rodados com o comando:
-    ```sh  
+   ```sh  
    npm run test
    ```
 
