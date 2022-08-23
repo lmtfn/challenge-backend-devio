@@ -92,12 +92,12 @@ const OrdersService = {
         {
           model: OrderProductsModel,
           as: 'orderitems',
-          attributes: ['amount', 'partialPrice', 'observation'],
+          attributes: ['id', 'amount', 'partialPrice', 'observation'],
           include: [
             {
               model: ProductsModel,
               as: 'product',
-              attributes: ['name', 'code'],
+              attributes: ['id', 'name', 'code'],
             },
           ],
         },

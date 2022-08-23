@@ -69,6 +69,8 @@ const OrderProductsService = {
       where: { orderId },
     });
 
+    if (!orderPrice) return 0;
+
     return orderPrice;
   },
 
@@ -103,13 +105,15 @@ const OrderProductsService = {
 
     const itemInfo: any = await this.getOrderItem(orderProductId);
 
+    const itemOrder = itemInfo.orderId;
+
     await OrderProductsModel.destroy({
       where: {
         id: orderProductId,
       },
     });
 
-    await OrdersService.updateOrderPrice(itemInfo.orderId);
+    return OrdersService.updateOrderPrice(itemOrder);
   },
 };
 
