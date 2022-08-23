@@ -9,7 +9,7 @@ orderProductsRouter.post(
 );
 orderProductsRouter.get(
   '/order-items/:orderId',
-  OrderProductsController.getItemsInOrderId,
+  OrderProductsController.getAllItemsInOrderId,
 );
 orderProductsRouter.patch(
   '/order-items/:orderProductId',
