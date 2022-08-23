@@ -1,23 +1,30 @@
 import { v4 as uuidv4 } from 'uuid';
-import OrdersModel from '../orders/ordersModel';
+import OrdersService from '../orders/ordersService';
 import PaymentsModel from '../payments/paymentsModel';
-import { enumPaymentType } from './paymentEntity';
 
 const PaymentsService = {
-  async insertPaymentMethod(
-    type: enumPaymentType,
-    value: number,
-    orderId: string,
-    receiptNumber: string,
-  ) {
-    const orderExists = await OrdersModel.count({
-      where: {
-        id: orderId,
-      },
+  async getOrderTotalPayments(orderId: string) {
+    const orderPayments = await PaymentsModel.sum('value', {
+      where: { orderId },
     });
+    return orderPayments;
+  },
+
+  async insertPaymentMethod({ type, value, orderId, receiptNumber }: any) {
+    const orderExists = await OrdersService.orderExists(orderId);
     if (!orderExists) throw new Error('Order not found');
+
+    const id = uuidv4();
+
+    const orderPayments = await this.getOrderTotalPayments(orderId);
+    const orderPrice: any = await OrdersService.getOrderBasicInfo(orderId);
+    if (orderPayments >= orderPrice.totalPrice)
+      throw new Error('Order has already been paid in its entirity');
+    if (orderPayments + value > orderPrice.totalPrice)
+      throw new Error('New payment value is larger than what is due');
+
     const newPayment = await PaymentsModel.create({
-      id: uuidv4(),
+      id,
       orderId,
       type,
       value,
