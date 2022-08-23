@@ -2,7 +2,7 @@
 
 ## 📝 Descrição
 
-Este é um projeto de api para um restaurante de fast-food criar e administrar os pedidos de seus clientes. Dentre as suas várias funções estão a visualização de produtos mais vendidos, a listagem de todos os pedidos em aberto e a inserção de vários tipos de pagamento.
+Este é um projeto de API para um restaurante de fast-food criar e administrar os pedidos de seus clientes. Dentre as suas várias funções estão a visualização de produtos mais vendidos, a listagem de todos os pedidos em aberto e a inserção de vários tipos de pagamento.
 
 
 ## 🚀 Começando
@@ -30,7 +30,7 @@ Para instalar o projeto na sua máquina, siga os passos abaixo:
 ```sh
    npm install
 ```
-3. Crie uma cópia do arquivo .envExample na raiz do projeto, chame-a de .env e insira nela os dados do banco de dados que você quer utilizar: 
+3. Crie uma cópia do arquivo _.envExample_ na raiz do projeto, chame-a de _.env_ e insira nela os dados do banco de dados que você quer utilizar: 
 ```js
     DB_HOST = Nome ou link do servidor (exemplo: localhost)
     DB_USER = Usuário
