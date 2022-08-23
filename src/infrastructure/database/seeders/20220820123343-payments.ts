@@ -9,7 +9,7 @@ export default {
           id: '261a3d80-8f55-4107-b6cd-8d64c76ec84a',
           orderId: '8fea0c95-e661-4315-8164-1d740d1a8e38',
           type: enumPaymentType.pix,
-          value: 48.1,
+          value: 28.1,
           receiptNumber: '8237823742872fg',
         },
         {
