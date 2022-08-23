@@ -18,10 +18,14 @@ const PaymentsService = {
 
     const orderPayments = await this.getOrderTotalPayments(orderId);
     const orderPrice: any = await OrdersService.getOrderBasicInfo(orderId);
-    if (orderPayments >= orderPrice.totalPrice)
+    if (orderPayments === orderPrice.totalPrice)
       throw new Error('Order has already been paid in its entirity');
     if (orderPayments + value > orderPrice.totalPrice)
-      throw new Error('New payment value is larger than what is due');
+      throw new Error(
+        `New payment value is larger than what is due: ${
+          orderPrice.totalPrice - orderPayments
+        }`,
+      );
 
     const newPayment = await PaymentsModel.create({
       id,
