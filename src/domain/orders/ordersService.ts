@@ -55,6 +55,30 @@ const OrdersService = {
     return orderDetails;
   },
 
+  async getOrdersSentToKitchen() {
+    const orderDetails = await OrdersModel.findAll({
+      where: {
+        status: 'sentToProduction',
+      },
+      attributes: ['id', 'clientsName', 'totalPrice', 'status'],
+      include: [
+        {
+          model: OrderProductsModel,
+          as: 'orderitems',
+          attributes: ['amount', 'partialPrice', 'observation'],
+          include: [
+            {
+              model: ProductsModel,
+              as: 'product',
+              attributes: ['name', 'code'],
+            },
+          ],
+        },
+      ],
+    });
+    return orderDetails;
+  },
+
   async getAllItemsAndDetailsInOrderId(orderId: string) {
     const orderExists = await this.orderExists(orderId);
     if (!orderExists) throw new Error('Order not found');
