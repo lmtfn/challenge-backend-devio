@@ -25,10 +25,6 @@ OrdersProductsModel.init(
     orderId: {
       type: DataTypes.STRING,
       allowNull: false,
-      // references: {
-      //   model: OrdersModel,
-      //   key: 'id',
-      // },
     },
     amount: {
       type: DataTypes.INTEGER,
@@ -56,11 +52,5 @@ OrdersProductsModel.hasOne(ProductsModel, {
   sourceKey: 'productId',
   as: 'product',
 });
-
-// OrdersProductsModel.hasOne(OrdersModel, {
-//   foreignKey: 'id',
-//   sourceKey: 'orderId',
-//   as: 'order',
-// });
 
 export default OrdersProductsModel;
