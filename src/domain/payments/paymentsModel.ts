@@ -22,7 +22,7 @@ PaymentsModel.init(
       allowNull: false,
     },
     value: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
     receiptNumber: {

@@ -1,32 +1,39 @@
 import sequelize from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
-import OrdersModel from '../orders/ordersModel';
+import OrdersService from '../orders/ordersService';
 import ProductsModel from '../products/productsModel';
+import ProductsService from '../products/productsService';
 import OrderProductsModel from './orderProductsModel';
 
 const OrderProductsService = {
-  async createItemInOrderId(
-    orderId: string,
-    productId: string,
-    amount: number,
-    partialPrice: number,
-    observation: string,
-  ) {
-    const orderExists = await OrdersModel.count({
+  async orderItemExists(orderProductId: string) {
+    const orderItemExists = await OrderProductsModel.count({
       where: {
-        id: orderId,
+        id: orderProductId,
       },
     });
+    return orderItemExists;
+  },
+
+  async createItemInOrderId({ orderId, productId, amount, observation }: any) {
+    const orderExists = await OrdersService.orderExists(orderId);
     if (!orderExists) throw new Error('Order not found');
-    const newOrderItems = await OrderProductsModel.create({
-      id: uuidv4(),
+
+    const id = uuidv4();
+    const unitPrice = await ProductsService.getUnitPrice(productId);
+    await OrderProductsModel.create({
+      id,
       orderId,
       productId,
       amount,
-      partialPrice,
+      partialPrice: parseFloat((unitPrice * amount).toFixed(2)),
       observation,
     });
-    return newOrderItems;
+
+    await OrdersService.updateOrderPrice(orderId);
+
+    const newOrderItem = await this.getOrderItem(id);
+    return newOrderItem;
   },
 
   async getProductsRanking() {
@@ -48,38 +55,34 @@ const OrderProductsService = {
     return productsList;
   },
 
-  async getItemsInOrderId(orderId: string) {
-    const orderExists = await OrdersModel.count({
-      where: {
-        id: orderId,
-      },
-    });
-    if (!orderExists) throw new Error('Order not found');
-    const orderDetails = await OrderProductsModel.findAll({
-      where: {
-        orderId,
-      },
-      include: ['product', 'order'],
-    });
-    return orderDetails;
-  },
-
-  async updateItemInOrder(
-    orderProductId: string,
-    amount: number,
-    partialPrice: number,
-    observation: string,
-  ) {
-    const orderItemExists = await OrderProductsModel.count({
+  async getOrderItem(orderProductId: string) {
+    const orderItem = await OrderProductsModel.findOne({
       where: {
         id: orderProductId,
       },
     });
+    return orderItem;
+  },
+
+  async getOrderPrice(orderId: string) {
+    const orderPrice = await OrderProductsModel.sum('partialPrice', {
+      where: { orderId },
+    });
+
+    return orderPrice;
+  },
+
+  async updateItemInOrder({ orderProductId, amount, observation }: any) {
+    const orderItemExists = await this.orderItemExists(orderProductId);
     if (!orderItemExists) throw new Error('Order item not found');
+
+    const itemInfo: any = await this.getOrderItem(orderProductId);
+
+    const unitPrice = await ProductsService.getUnitPrice(itemInfo.productId);
     await OrderProductsModel.update(
       {
         amount,
-        partialPrice,
+        partialPrice: parseFloat((unitPrice * amount).toFixed(2)),
         observation,
       },
       {
@@ -88,26 +91,25 @@ const OrderProductsService = {
         },
       },
     );
-    const newOrderItems = await OrderProductsModel.findOne({
-      where: {
-        id: orderProductId,
-      },
-    });
-    return newOrderItems;
+    await OrdersService.updateOrderPrice(itemInfo.orderId);
+
+    const newOrderItem = await this.getOrderItem(orderProductId);
+    return newOrderItem;
   },
 
   async deleteItemInOrder(orderProductId: string) {
-    const orderItemExists = await OrderProductsModel.count({
-      where: {
-        id: orderProductId,
-      },
-    });
+    const orderItemExists = await this.orderItemExists(orderProductId);
     if (!orderItemExists) throw new Error('Order item not found');
+
+    const itemInfo: any = await this.getOrderItem(orderProductId);
+
     await OrderProductsModel.destroy({
       where: {
         id: orderProductId,
       },
     });
+
+    await OrdersService.updateOrderPrice(itemInfo.orderId);
   },
 };
 

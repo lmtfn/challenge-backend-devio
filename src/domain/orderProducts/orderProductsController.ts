@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
+import OrdersService from '../orders/ordersService';
 import OrderProductsService from './orderProductsService';
 
 const OrderProductsController = {
   async createItemInOrderId(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
-      const { productId, amount, partialPrice, observation } = req.body;
-      const data = await OrderProductsService.createItemInOrderId(
+      const { productId, amount, observation } = req.body;
+      const data = await OrderProductsService.createItemInOrderId({
         orderId,
         productId,
         amount,
-        partialPrice,
         observation,
-      );
+      });
       res.status(201);
       res.json(data);
     } catch (err: any) {
@@ -21,10 +21,10 @@ const OrderProductsController = {
     }
   },
 
-  async getItemsInOrderId(req: Request, res: Response) {
+  async getAllItemsInOrderId(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
-      const data = await OrderProductsService.getItemsInOrderId(orderId);
+      const data = await OrdersService.getAllItemsAndDetailsInOrderId(orderId);
       res.status(200);
       res.json(data);
     } catch (err: any) {
@@ -36,13 +36,12 @@ const OrderProductsController = {
   async updateItemInOrder(req: Request, res: Response) {
     try {
       const { orderProductId } = req.params;
-      const { amount, partialPrice, observation } = req.body;
-      const data = await OrderProductsService.updateItemInOrder(
+      const { amount, observation } = req.body;
+      const data: any = await OrderProductsService.updateItemInOrder({
         orderProductId,
         amount,
-        partialPrice,
         observation,
-      );
+      });
       res.status(200);
       res.json(data);
     } catch (err: any) {

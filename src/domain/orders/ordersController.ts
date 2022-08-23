@@ -12,6 +12,7 @@ const OrdersController = {
       res.json({ message: err.message });
     }
   },
+
   async getOrderInfoWithPayment(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
@@ -23,14 +24,14 @@ const OrdersController = {
       res.json({ message: err.message });
     }
   },
+
   async updateOrderInfo(req: Request, res: Response) {
     try {
       const { orderId } = req.params;
-      const { clientsName, totalPrice, status } = req.body;
+      const { clientsName, status } = req.body;
       const data = await OrdersService.updateOrderInfo({
         orderId,
         clientsName,
-        totalPrice,
         status,
       });
       res.status(200);

@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+import OrderProductsModel from '../orderProducts/orderProductsModel';
+import OrderProductsService from '../orderProducts/orderProductsService';
 import OrdersModel from '../orders/ordersModel';
 import PaymentsModel from '../payments/paymentsModel';
+
+import ProductsModel from '../products/productsModel';
 import { enumOrderStatus } from './orderEntity';
 
 const OrdersService = {
@@ -23,7 +27,7 @@ const OrdersService = {
     return newOrder;
   },
 
-  async getOrderInfo(orderId: string) {
+  async getOrderBasicInfo(orderId: string) {
     const orderDetails = await OrdersModel.findOne({
       where: {
         id: orderId,
@@ -51,13 +55,67 @@ const OrdersService = {
     return orderDetails;
   },
 
-  async updateOrderInfo({ orderId, clientsName, totalPrice, status }: any) {
+  async getAllItemsAndDetailsInOrderId(orderId: string) {
+    const orderExists = await this.orderExists(orderId);
+    if (!orderExists) throw new Error('Order not found');
+
+    const orderDetails = await OrdersModel.findAll({
+      where: {
+        id: orderId,
+      },
+      attributes: ['id', 'clientsName', 'totalPrice', 'status'],
+      include: [
+        {
+          model: OrderProductsModel,
+          as: 'orderitems',
+          attributes: ['amount', 'partialPrice', 'observation'],
+          include: [
+            {
+              model: ProductsModel,
+              as: 'product',
+              attributes: ['name', 'code'],
+            },
+          ],
+        },
+      ],
+    });
+    return orderDetails;
+  },
+
+  async getItemsInOrderId(orderId: string) {
+    const orderPrice = await OrderProductsModel.findAll({
+      where: {
+        orderId,
+      },
+    });
+    return orderPrice;
+  },
+
+  async updateOrderPrice(orderId: string) {
+    const orderExists = await this.orderExists(orderId);
+    if (!orderExists) throw new Error('Order not found');
+
+    const orderPrice = await OrderProductsService.getOrderPrice(orderId);
+
+    await OrdersModel.update(
+      {
+        totalPrice: orderPrice,
+      },
+      {
+        where: {
+          id: orderId,
+        },
+      },
+    );
+    return this.getOrderBasicInfo(orderId);
+  },
+
+  async updateOrderInfo({ orderId, clientsName, status }: any) {
     const orderExists = await this.orderExists(orderId);
     if (!orderExists) throw new Error('Order not found');
     await OrdersModel.update(
       {
         clientsName,
-        totalPrice,
         status,
       },
       {
@@ -66,7 +124,7 @@ const OrdersService = {
         },
       },
     );
-    return this.getOrderInfo(orderId);
+    return this.getOrderBasicInfo(orderId);
   },
 };
 
