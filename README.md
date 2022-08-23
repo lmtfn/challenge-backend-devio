@@ -68,7 +68,7 @@ Foram feitos testes para cada endpoint do projeto. Eles podem ser rodados com o 
 
 ## 💻 Usando a API
 
-_Entenda como usar cada endpoint da documentação através da [Documentação](https://example.com)_
+_Entenda como usar cada endpoint da documentação através da [Documentação](https://documenter.getpostman.com/view/21580193/VUqrPHWX)_
 
 
 ## 🛠️ Construído com
