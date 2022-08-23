@@ -11,11 +11,12 @@ Abaixo estão as instruções para rodar o projeto na sua máquina local, para f
 
 ### 📋 Pré-requisitos
 
-É necessário o gerenciador de pacotes npm para seguir este passo a passo.
+É necessário o gerenciador de pacotes NPM para seguir este passo a passo.
 
 ```sh
   npm install npm@latest -g
 ```
+É importante ressaltar que este projeto foi feito com banco de dados relacional (linguagem SQL).
 
 ### 🔧 Rodando o projeto
 
@@ -49,7 +50,7 @@ Para instalar o projeto na sua máquina, siga os passos abaixo:
 ```sh
    npm run setup:dev
 ```
-7. Por fim, rode ligue o servidor:
+7. Por fim, ligue o servidor:
 ```sh
    npm run dev
 ```
@@ -65,14 +66,14 @@ Foram feitos testes para cada endpoint do projeto. Eles podem ser rodados com o 
 ```
 
 
-## 💻 Usando a api
+## 💻 Usando a API
 
 _Entenda como usar cada endpoint da documentação através da [Documentação](https://example.com)_
 
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
+Principais ferramentas usadas no projeto:
 
 * TypeScript
 * JavaScript
