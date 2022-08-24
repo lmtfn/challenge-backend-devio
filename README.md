@@ -4,7 +4,7 @@
 
 Este é um projeto de API para um restaurante de fast food, voltado para a gestão de pedidos de clientes. Dentre as suas várias funções estão a visualização de produtos mais vendidos, a listagem de todos os pedidos em aberto e a inserção de vários tipos de pagamento. Esta API pode ser acessada através do link: [Fast Food - lmtfn](https://challenge-devio-lmtfn.herokuapp.com/). 
 
-_O deploy foi feito através da plataforma Heroku e a base de dados está armazenada na AWS. É importante ressaltar que este projeto foi feito com banco de dados relacional (linguagem SQL)._
+_O deploy foi feito através da plataforma Heroku e a base de dados está armazenada na AWS. É importante ressaltar que este projeto foi feito com banco de dados relacional (MySQL)._
 
 
 ## 🚀 Começando
