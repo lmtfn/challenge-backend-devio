@@ -1,8 +1,10 @@
-# challenge-backend-devio
+# challenge-backend-devio: Fast Food
 
 ## 📝 Descrição
 
-Este é um projeto de API para um restaurante de fast-food criar e administrar os pedidos de seus clientes. Dentre as suas várias funções estão a visualização de produtos mais vendidos, a listagem de todos os pedidos em aberto e a inserção de vários tipos de pagamento.
+Este é um projeto de API para um restaurante de fast food, voltado para a gestão de pedidos de clientes. Dentre as suas várias funções estão a visualização de produtos mais vendidos, a listagem de todos os pedidos em aberto e a inserção de vários tipos de pagamento. Esta API pode ser acessada através do link: [Fast Food - lmtfn](https://challenge-devio-lmtfn.herokuapp.com/). 
+
+_O deploy foi feito através da plataforma Heroku e a base de dados está armazenada na AWS. É importante ressaltar que este projeto foi feito com banco de dados relacional (linguagem SQL)._
 
 
 ## 🚀 Começando
@@ -11,12 +13,11 @@ Abaixo estão as instruções para rodar o projeto na sua máquina local, para f
 
 ### 📋 Pré-requisitos
 
-É necessário o gerenciador de pacotes NPM para seguir este passo a passo.
+É necessário ter o gerenciador de pacotes NPM para seguir este passo a passo.
 
 ```sh
   npm install npm@latest -g
 ```
-É importante ressaltar que este projeto foi feito com banco de dados relacional (linguagem SQL).
 
 ### 🔧 Rodando o projeto
 
@@ -24,7 +25,7 @@ Para instalar o projeto na sua máquina, siga os passos abaixo:
 
 1. Clone o repositório na sua máquina:
 ```sh
-   git clone https://github.com/https://github.com/lmtfn/challenge-backend-devio
+   git clone https://github.com/lmtfn/challenge-backend-devio.git
 ```
 2. Instale os pacotes NPM:
 ```sh
@@ -46,7 +47,7 @@ Para instalar o projeto na sua máquina, siga os passos abaixo:
 ```sh
    npm run build
 ```
-6. Crie as tabelas dentro do seu banco de dados:
+6. Crie as tabelas dentro do seu banco de dados e adicione dados a elas:
 ```sh
    npm run setup:dev
 ```
@@ -80,3 +81,7 @@ Principais ferramentas usadas no projeto:
 * NodeJs
 * Sequelize
 * Express
+
+## ✒️ Autora
+
+Laura Neves - [LinkedIn](https://www.linkedin.com/in/laura-neves-26908346/) - [GitHub](https://github.com/lmtfn)
